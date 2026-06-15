@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>단축키 사전 — 자주 쓰는 키보드 단축키 모음</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root{
+    /* ===== 라이트 모드 (기본값) ===== */
+    --bg:#f4f5f9;
+    --bg-soft:#ffffff;
+    --surface:#ffffff;
+    --surface-light:#eef1f6;
+    --border:#e1e5ec;
+    --text:#1d2330;
+    --text-muted:#717b8c;
+    --key-shadow:#ced3dd;
+    --controls-bg:rgba(244,245,249,.86);
+    --shadow-card:0 14px 28px -18px rgba(30,40,70,.22), 0 0 0 1px rgba(20,30,60,.02);
+
+    --accent:#f5a623;
+    --accent-soft:rgba(245,166,35,.13);
+    --on-accent:#1b1306;
+
+    --c-general:#f5a623;
+    --c-sheets:#10b981;
+    --c-excel:#84cc16;
+    --c-ppt:#fb7185;
+    --c-word:#3b82f6;
+    --c-photoshop:#a855f7;
+    --c-vscode:#06b6d4;
+    --c-chrome:#fb923c;
+    --c-notion:#64748b;
+    --c-slack:#ec4899;
+    --c-zoom:#6366f1;
+    --c-figma:#14b8a6;
+    --c-hwp:#ef4444;
+
+    --radius:14px;
+  }
+
+  [data-theme="dark"]{
+    --bg:#13161c;
+    --bg-soft:#191d25;
+    --surface:#20252f;
+    --surface-light:#2b3340;
+    --border:#333c4a;
+    --text:#edf0f4;
+    --text-muted:#8e98aa;
+    --key-shadow:#0a0c10;
+    --controls-bg:rgba(19,22,28,.86);
+    --shadow-card:0 14px 28px -16px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.02);
+
+    --accent:#ffb454;
+    --accent-soft:rgba(255,180,84,.14);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(245,166,35,.07), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(16,185,129,.06), transparent 40%),
+      radial-gradient(circle at 50% 90%, rgba(59,130,246,.05), transparent 45%);
+    background-attachment:fixed;
+    transition:background-color .35s ease, color .35s ease;
+  }
+
+  /* ===== 공통 컨테이너 ===== */
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  a{color:inherit;}
+
+  /* ===== 테마 토글 버튼 ===== */
+  .theme-toggle{
+    position:fixed;
+    top:18px; right:18px;
+    z-index:80;
+    width:46px; height:46px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.15rem;
+    cursor:pointer;
+    box-shadow:0 6px 16px -8px rgba(0,0,0,.25);
+    transition:background-color .3s ease, border-color .3s ease, transform .2s ease;
+  }
+  .theme-toggle:hover{transform:translateY(-2px) rotate(10deg);}
+  .theme-toggle .icon-dark{display:none;}
+  [data-theme="dark"] .theme-toggle .icon-light{display:none;}
+  [data-theme="dark"] .theme-toggle .icon-dark{display:block;}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:90px 0 60px;
+    text-align:center;
+    position:relative;
+  }
+  .hero .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:1px solid rgba(245,166,35,.3);
+    border-radius:999px;
+    padding:7px 18px;
+    margin-bottom:26px;
+  }
+  [data-theme="dark"] .hero .eyebrow{border-color:rgba(255,180,84,.3);}
+  .hero .eyebrow::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 4px var(--accent-soft);
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 4.4rem);
+    font-weight:800;
+    letter-spacing:-.02em;
+    line-height:1.15;
+    margin-bottom:18px;
+  }
+  .hero h1 .accent-word{
+    background:linear-gradient(120deg,var(--accent),var(--c-sheets));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{
+    max-width:560px;
+    margin:0 auto 44px;
+    color:var(--text-muted);
+    font-size:clamp(.98rem,2vw,1.08rem);
+  }
+
+  /* ===== 키보드 일러스트 (시그니처 요소) ===== */
+  .keyboard-stage{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:36px;
+    margin-bottom:8px;
+    perspective:600px;
+  }
+  .keycap{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:600;
+    font-size:.95rem;
+    color:var(--text);
+    background:linear-gradient(180deg,var(--surface-light),var(--surface));
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px 20px;
+    box-shadow:0 6px 0 var(--key-shadow), inset 0 1px 0 rgba(255,255,255,.06);
+    animation:keyPress 3.2s ease-in-out infinite;
+    will-change:transform, box-shadow;
+    transition:background-color .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .keycap.wide{padding:14px 30px;}
+  .keycap.accent{
+    color:#1b1306;
+    background:linear-gradient(180deg,#ffd08a,var(--accent));
+    border-color:#c98b30;
+    box-shadow:0 6px 0 #b9742a, inset 0 1px 0 rgba(255,255,255,.35);
+  }
+  .keycap:nth-child(1){animation-delay:0s;}
+  .keycap:nth-child(2){animation-delay:.15s;}
+  .keycap:nth-child(3){animation-delay:.3s;}
+  .keycap:nth-child(4){animation-delay:.45s;}
+  .keycap:nth-child(5){animation-delay:.6s;}
+  .keycap:nth-child(6){animation-delay:.75s;}
+  .key-plus{
+    align-self:center;
+    color:var(--text-muted);
+    font-weight:700;
+    font-size:1.1rem;
+    transform:translateY(-6px);
+  }
+
+  @keyframes keyPress{
+    0%,70%,100%{ transform:translateY(0); box-shadow:0 6px 0 var(--key-shadow), inset 0 1px 0 rgba(255,255,255,.06); }
+    80%{ transform:translateY(6px); box-shadow:0 0 0 var(--key-shadow), inset 0 1px 0 rgba(255,255,255,.06); }
+  }
+  .keycap.accent{
+    animation-name:keyPressAccent;
+  }
+  @keyframes keyPressAccent{
+    0%,70%,100%{ transform:translateY(0); box-shadow:0 6px 0 #b9742a, inset 0 1px 0 rgba(255,255,255,.35); }
+    80%{ transform:translateY(6px); box-shadow:0 0 0 #b9742a, inset 0 1px 0 rgba(255,255,255,.35); }
+  }
+
+  /* ===== 검색 + 탭 (sticky) ===== */
+  .controls{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--controls-bg);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+    padding:18px 0;
+    transition:background-color .3s ease, border-color .3s ease;
+  }
+  .search-box{
+    max-width:480px;
+    margin:0 auto 16px;
+    position:relative;
+  }
+  .search-box input{
+    width:100%;
+    padding:13px 18px 13px 44px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text);
+    font-size:.95rem;
+    outline:none;
+    transition:border-color .2s, box-shadow .2s, background-color .3s ease, color .3s ease;
+  }
+  .search-box input::placeholder{color:var(--text-muted);}
+  .search-box input:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 4px var(--accent-soft);
+  }
+  .search-box .icon{
+    position:absolute;
+    left:17px; top:50%;
+    transform:translateY(-50%);
+    color:var(--text-muted);
+    font-size:1rem;
+    pointer-events:none;
+  }
+
+  .tabs-wrapper{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .tabs-arrow{
+    flex:0 0 auto;
+    width:34px; height:34px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text-muted);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    cursor:pointer;
+    transition:color .2s ease, border-color .2s ease, background-color .3s ease, opacity .2s ease, transform .2s ease;
+  }
+  .tabs-arrow:hover:not(:disabled){
+    color:var(--text);
+    border-color:var(--accent);
+    transform:translateY(-1px);
+  }
+  .tabs-arrow:disabled{
+    opacity:.35;
+    cursor:default;
+  }
+  .tabs{
+    display:flex;
+    gap:10px;
+    justify-content:flex-start;
+    flex-wrap:nowrap;
+    flex:1;
+    min-width:0;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:2px 4px;
+  }
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab-btn{
+    flex:0 0 auto;
+    font-family:inherit;
+    font-size:.88rem;
+    font-weight:600;
+    color:var(--text-muted);
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:9px 18px;
+    cursor:pointer;
+    transition:background-color .2s ease, border-color .2s ease, color .2s ease;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    white-space:nowrap;
+  }
+  .tab-btn .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--dot-color, var(--accent));
+  }
+  .tab-btn:hover{
+    color:var(--text);
+    border-color:var(--dot-color, var(--accent));
+  }
+  .tab-btn.active{
+    color:var(--on-accent);
+    background:var(--dot-color, var(--accent));
+    border-color:var(--dot-color, var(--accent));
+  }
+  .tab-btn.active .dot{background:var(--on-accent);}
+
+  /* ===== 섹션 ===== */
+  .section{
+    padding:64px 0 24px;
+    text-align:center;
+  }
+  .section-head{
+    margin-bottom:42px;
+  }
+  .section-head .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--cat-color);
+    margin-bottom:14px;
+  }
+  .section-head .tag::before{
+    content:'';
+    width:18px;height:2px;
+    background:var(--cat-color);
+  }
+  .section-head .tag::after{
+    content:'';
+    width:18px;height:2px;
+    background:var(--cat-color);
+  }
+  .section-head h2{
+    font-size:clamp(1.6rem,4vw,2.2rem);
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .section-head p{
+    color:var(--text-muted);
+    font-size:.96rem;
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(250px,1fr));
+    gap:16px;
+    text-align:left;
+  }
+
+  .shortcut-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px;
+    position:relative;
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .3s ease;
+  }
+  .shortcut-card .save-icon{
+    position:absolute;
+    top:12px; right:12px;
+    width:30px; height:30px;
+    border-radius:50%;
+    background:var(--surface-light);
+    border:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.85rem;
+    color:var(--text-muted);
+    opacity:0;
+    transform:translateY(-4px);
+    transition:opacity .2s ease, transform .2s ease, background-color .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .shortcut-card:hover .save-icon{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .shortcut-card .save-icon:hover{
+    color:var(--cat-color);
+    border-color:var(--cat-color);
+  }
+  .shortcut-card.saved .save-icon{
+    color:#10b981;
+    border-color:#10b981;
+  }
+  .js .shortcut-card.pre-reveal{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  .js .shortcut-card.pre-reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+    transition:opacity .5s ease, transform .5s ease, box-shadow .25s ease, border-color .25s ease, background-color .3s ease;
+  }
+  .shortcut-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--cat-color);
+    box-shadow:var(--shadow-card);
+  }
+
+  .key-combo{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  .key{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:600;
+    font-size:.82rem;
+    color:var(--text);
+    background:linear-gradient(180deg,var(--surface-light),var(--surface));
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:6px 11px;
+    box-shadow:0 3px 0 var(--key-shadow), inset 0 1px 0 rgba(255,255,255,.05);
+    transition:transform .15s ease, box-shadow .15s ease, background-color .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .shortcut-card:hover .key{
+    transform:translateY(2px);
+    box-shadow:0 1px 0 var(--key-shadow), inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .key-plus-small{
+    color:var(--text-muted);
+    font-weight:700;
+    font-size:.85rem;
+  }
+  .shortcut-card .desc{
+    font-size:.92rem;
+    color:var(--text-muted);
+    line-height:1.55;
+  }
+  .shortcut-card .desc strong{
+    color:var(--text);
+    font-weight:600;
+  }
+
+  .no-result{
+    display:none;
+    text-align:center;
+    color:var(--text-muted);
+    padding:60px 0;
+    font-size:.95rem;
+  }
+  .no-result.show{display:block;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;
+    padding:60px 24px 50px;
+    color:var(--text-muted);
+    font-size:.85rem;
+    border-top:1px solid var(--border);
+    margin-top:50px;
+    transition:border-color .3s ease;
+  }
+  footer .foot-title{
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:8px;
+    font-size:1rem;
+  }
+  footer .tip{
+    margin-top:18px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.8rem;
+    color:var(--text-muted);
+  }
+
+  /* ===== TOP BUTTON ===== */
+  .to-top{
+    position:fixed;
+    bottom:26px; right:26px;
+    width:46px; height:46px;
+    border-radius:50%;
+    background:var(--accent);
+    color:var(--on-accent);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.1rem;
+    cursor:pointer;
+    box-shadow:0 8px 20px -6px rgba(0,0,0,.5);
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(10px);
+    transition:opacity .25s, transform .25s, background-color .3s ease;
+    z-index:60;
+  }
+  .to-top.show{
+    opacity:1; pointer-events:auto; transform:translateY(0);
+  }
+  .to-top:hover{filter:brightness(1.08);}
+
+  /* ===== 반응형 ===== */
+  @media (max-width:640px){
+    .hero{padding:64px 0 40px;}
+    .keyboard-stage{gap:6px;}
+    .keycap{padding:10px 14px; font-size:.82rem;}
+    .keycap.wide{padding:10px 20px;}
+    .section{padding:46px 0 12px;}
+    .section-head{margin-bottom:28px;}
+    .grid{grid-template-columns:1fr;}
+    .controls{padding:14px 0;}
+    .tabs{justify-content:flex-start;}
+    .theme-toggle{width:40px;height:40px;font-size:1rem;top:12px;right:12px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="다크/라이트 모드 전환">
+    <span class="icon-light">🌙</span>
+    <span class="icon-dark">☀️</span>
+  </button>
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Keyboard Shortcuts Guide</span>
+      <h1><span class="accent-word">단축키 사전</span></h1>
+
+      <div class="keyboard-stage" aria-hidden="true">
+        <span class="keycap">Ctrl</span>
+        <span class="key-plus">+</span>
+        <span class="keycap accent">C</span>
+        <span class="key-plus">+</span>
+        <span class="keycap">V</span>
+        <span class="key-plus">+</span>
+        <span class="keycap">Z</span>
+        <span class="key-plus">+</span>
+        <span class="keycap wide">Space</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="wrap">
+      <div class="search-box">
+        <span class="icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="단축키 또는 기능 검색 (예: 복사, Ctrl+S, 정렬)" autocomplete="off">
+      </div>
+      <div class="tabs-wrapper">
+        <button class="tabs-arrow" id="tabsPrev" aria-label="이전 카테고리">←</button>
+        <nav class="tabs" id="tabs">
+          <button class="tab-btn active" data-target="general" style="--dot-color:var(--c-general)"><span class="dot"></span>전체 공통</button>
+          <button class="tab-btn" data-target="sheets" style="--dot-color:var(--c-sheets)"><span class="dot"></span>Google Sheets</button>
+          <button class="tab-btn" data-target="excel" style="--dot-color:var(--c-excel)"><span class="dot"></span>Excel</button>
+          <button class="tab-btn" data-target="ppt" style="--dot-color:var(--c-ppt)"><span class="dot"></span>PowerPoint</button>
+          <button class="tab-btn" data-target="word" style="--dot-color:var(--c-word)"><span class="dot"></span>Word</button>
+          <button class="tab-btn" data-target="photoshop" style="--dot-color:var(--c-photoshop)"><span class="dot"></span>Photoshop</button>
+          <button class="tab-btn" data-target="vscode" style="--dot-color:var(--c-vscode)"><span class="dot"></span>VS Code</button>
+          <button class="tab-btn" data-target="chrome" style="--dot-color:var(--c-chrome)"><span class="dot"></span>Chrome</button>
+          <button class="tab-btn" data-target="notion" style="--dot-color:var(--c-notion)"><span class="dot"></span>Notion</button>
+          <button class="tab-btn" data-target="slack" style="--dot-color:var(--c-slack)"><span class="dot"></span>Slack</button>
+          <button class="tab-btn" data-target="zoom" style="--dot-color:var(--c-zoom)"><span class="dot"></span>Zoom</button>
+          <button class="tab-btn" data-target="figma" style="--dot-color:var(--c-figma)"><span class="dot"></span>Figma</button>
+          <button class="tab-btn" data-target="hwp" style="--dot-color:var(--c-hwp)"><span class="dot"></span>한글(HWP)</button>
+        </nav>
+        <button class="tabs-arrow" id="tabsNext" aria-label="다음 카테고리">→</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+
+    <!-- ===== 전체 공통 ===== -->
+    <section class="section" id="general" style="--cat-color:var(--c-general)">
+      <div class="section-head">
+        <span class="tag">All Programs</span>
+        <h2>전체적으로 많이 쓰는 단축키</h2>
+        <p>운영체제와 브라우저, 대부분의 프로그램에서 공통으로 동작하는 기본 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-general"></div>
+    </section>
+
+    <!-- ===== Google Sheets ===== -->
+    <section class="section" id="sheets" style="--cat-color:var(--c-sheets)">
+      <div class="section-head">
+        <span class="tag">Google Sheets</span>
+        <h2>구글 스프레드시트 단축키</h2>
+        <p>표 작업, 서식 지정, 시트 이동을 빠르게 처리할 수 있는 단축키 모음입니다.</p>
+      </div>
+      <div class="grid" id="grid-sheets"></div>
+    </section>
+
+    <!-- ===== Excel ===== -->
+    <section class="section" id="excel" style="--cat-color:var(--c-excel)">
+      <div class="section-head">
+        <span class="tag">Microsoft Excel</span>
+        <h2>엑셀 단축키</h2>
+        <p>데이터 입력, 서식 지정, 시트 탐색을 빠르게 만들어주는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-excel"></div>
+    </section>
+
+    <!-- ===== PowerPoint ===== -->
+    <section class="section" id="ppt" style="--cat-color:var(--c-ppt)">
+      <div class="section-head">
+        <span class="tag">Microsoft PowerPoint</span>
+        <h2>파워포인트 단축키</h2>
+        <p>슬라이드 작성, 발표 진행, 개체 정리에 유용한 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-ppt"></div>
+    </section>
+
+    <!-- ===== Word ===== -->
+    <section class="section" id="word" style="--cat-color:var(--c-word)">
+      <div class="section-head">
+        <span class="tag">Microsoft Word</span>
+        <h2>워드 단축키</h2>
+        <p>문서 서식 지정과 편집 속도를 높여주는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-word"></div>
+    </section>
+
+    <!-- ===== Photoshop ===== -->
+    <section class="section" id="photoshop" style="--cat-color:var(--c-photoshop)">
+      <div class="section-head">
+        <span class="tag">Adobe Photoshop</span>
+        <h2>포토샵 단축키</h2>
+        <p>도구 전환, 레이어 작업, 화면 확대·축소에 자주 쓰이는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-photoshop"></div>
+    </section>
+
+    <!-- ===== VS Code ===== -->
+    <section class="section" id="vscode" style="--cat-color:var(--c-vscode)">
+      <div class="section-head">
+        <span class="tag">Visual Studio Code</span>
+        <h2>VS Code 단축키</h2>
+        <p>코드 작성과 탐색, 디버깅 속도를 높여주는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-vscode"></div>
+    </section>
+
+    <!-- ===== Chrome ===== -->
+    <section class="section" id="chrome" style="--cat-color:var(--c-chrome)">
+      <div class="section-head">
+        <span class="tag">Google Chrome</span>
+        <h2>크롬 브라우저 단축키</h2>
+        <p>탭 관리와 페이지 탐색을 더 빠르게 해주는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-chrome"></div>
+    </section>
+
+    <!-- ===== Notion ===== -->
+    <section class="section" id="notion" style="--cat-color:var(--c-notion)">
+      <div class="section-head">
+        <span class="tag">Notion</span>
+        <h2>노션 단축키</h2>
+        <p>페이지와 블록을 빠르게 만들고 정리할 수 있는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-notion"></div>
+    </section>
+
+    <!-- ===== Slack ===== -->
+    <section class="section" id="slack" style="--cat-color:var(--c-slack)">
+      <div class="section-head">
+        <span class="tag">Slack</span>
+        <h2>슬랙 단축키</h2>
+        <p>채널 이동과 메시지 작성을 더 빠르게 해주는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-slack"></div>
+    </section>
+
+    <!-- ===== Zoom ===== -->
+    <section class="section" id="zoom" style="--cat-color:var(--c-zoom)">
+      <div class="section-head">
+        <span class="tag">Zoom</span>
+        <h2>줌(Zoom) 단축키</h2>
+        <p>회의 중 음소거, 화면 공유, 녹화 등을 빠르게 제어하는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-zoom"></div>
+    </section>
+
+    <!-- ===== Figma ===== -->
+    <section class="section" id="figma" style="--cat-color:var(--c-figma)">
+      <div class="section-head">
+        <span class="tag">Figma</span>
+        <h2>피그마 단축키</h2>
+        <p>도형·텍스트 도구 전환과 레이아웃 작업에 자주 쓰이는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-figma"></div>
+    </section>
+
+    <!-- ===== 한글(HWP) ===== -->
+    <section class="section" id="hwp" style="--cat-color:var(--c-hwp)">
+      <div class="section-head">
+        <span class="tag">Hancom 한글</span>
+        <h2>한글(HWP) 단축키</h2>
+        <p>문서 작성과 서식 지정에 자주 쓰이는 한글 프로그램 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-hwp"></div>
+    </section>
+
+    <p class="no-result" id="noResult">검색 결과가 없습니다. 다른 키워드로 검색해보세요.</p>
+
+  </main>
+
+  <footer>
+    <div class="foot-title">⌨ 단축키 사전</div>
+    <p>자주 쓰는 키보드 단축키를 모아 정리한 참고용 페이지입니다.</p>
+    <p class="tip">TIP. 위 검색창에 기능 이름이나 키 이름을 입력하면 전체 카테고리에서 바로 찾을 수 있어요.<br>각 카드를 클릭하면 해당 단축키를 PNG 이미지로 저장할 수 있어요.</p>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="맨 위로">↑</button>
+
+<script>
+  // ===================== 테마 (다크/라이트, 기본값: 라이트) =====================
+  (function(){
+    var saved = null;
+    try { saved = localStorage.getItem('shortcut-theme'); } catch(e){}
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+
+    var btn = document.getElementById('themeToggle');
+    btn.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('shortcut-theme', next); } catch(e){}
+    });
+  })();
+
+  // ===================== 데이터 =====================
+  const DATA = {
+    general: [
+      { keys:["Ctrl","C"], desc:"<strong>복사</strong> — 선택한 영역을 클립보드에 복사" },
+      { keys:["Ctrl","V"], desc:"<strong>붙여넣기</strong> — 복사하거나 잘라낸 내용을 붙여넣기" },
+      { keys:["Ctrl","X"], desc:"<strong>잘라내기</strong> — 선택한 영역을 잘라내어 클립보드로 이동" },
+      { keys:["Ctrl","Z"], desc:"<strong>실행 취소</strong> — 마지막 작업을 취소" },
+      { keys:["Ctrl","Y"], desc:"<strong>다시 실행</strong> — 취소한 작업을 다시 실행 (Ctrl+Shift+Z도 동일)" },
+      { keys:["Ctrl","A"], desc:"<strong>전체 선택</strong> — 현재 입력칸 또는 문서 전체 선택" },
+      { keys:["Ctrl","S"], desc:"<strong>저장</strong> — 현재 작업 중인 파일 저장" },
+      { keys:["Ctrl","P"], desc:"<strong>인쇄</strong> — 인쇄 미리보기 및 인쇄 실행" },
+      { keys:["Ctrl","F"], desc:"<strong>찾기</strong> — 현재 페이지 또는 문서에서 텍스트 검색" },
+      { keys:["Ctrl","H"], desc:"<strong>찾기 및 바꾸기</strong> — 특정 텍스트를 찾아 다른 텍스트로 변경" },
+      { keys:["Ctrl","N"], desc:"<strong>새로 만들기</strong> — 새 창 또는 새 문서 열기" },
+      { keys:["Ctrl","O"], desc:"<strong>열기</strong> — 파일 또는 문서 열기" },
+      { keys:["Ctrl","W"], desc:"<strong>닫기</strong> — 현재 탭 또는 창 닫기" },
+      { keys:["Alt","Tab"], desc:"<strong>창 전환</strong> — 실행 중인 다른 프로그램 창으로 전환" },
+      { keys:["Ctrl","Tab"], desc:"<strong>탭 전환</strong> — 브라우저나 프로그램의 다음 탭으로 이동" },
+      { keys:["F2"], desc:"<strong>이름 바꾸기</strong> — 선택한 파일이나 항목의 이름 변경" },
+      { keys:["F5"], desc:"<strong>새로고침</strong> — 현재 페이지 또는 화면을 새로고침" },
+      { keys:["Win","D"], desc:"<strong>바탕화면 보기</strong> — 모든 창을 최소화하고 바탕화면 표시" },
+      { keys:["Win","E"], desc:"<strong>파일 탐색기</strong> — 파일 탐색기 새 창 열기" },
+      { keys:["Win","L"], desc:"<strong>화면 잠금</strong> — 컴퓨터 화면을 즉시 잠금" },
+      { keys:["Ctrl","Shift","Esc"], desc:"<strong>작업 관리자</strong> — 작업 관리자를 바로 실행" },
+      { keys:["Ctrl","Shift","T"], desc:"<strong>닫은 탭 복구</strong> — 방금 닫은 브라우저 탭을 다시 열기" },
+    ],
+    sheets: [
+      { keys:["Ctrl",";"], desc:"<strong>오늘 날짜 입력</strong> — 선택한 셀에 현재 날짜를 입력" },
+      { keys:["Ctrl","Shift",";"], desc:"<strong>현재 시간 입력</strong> — 선택한 셀에 현재 시간을 입력" },
+      { keys:["Alt","Enter"], desc:"<strong>셀 안에서 줄바꿈</strong> — 한 셀 안에서 다음 줄로 이동" },
+      { keys:["Ctrl","Space"], desc:"<strong>열 전체 선택</strong> — 현재 셀이 속한 열 전체를 선택" },
+      { keys:["Shift","Space"], desc:"<strong>행 전체 선택</strong> — 현재 셀이 속한 행 전체를 선택" },
+      { keys:["Ctrl","방향키"], desc:"<strong>데이터 끝으로 이동</strong> — 데이터가 입력된 영역의 끝으로 셀 이동" },
+      { keys:["Ctrl","Shift","방향키"], desc:"<strong>범위 선택</strong> — 데이터 끝까지 범위를 한 번에 선택" },
+      { keys:["Alt","/"], desc:"<strong>메뉴 검색</strong> — 원하는 기능을 검색해서 바로 실행" },
+      { keys:["Ctrl","`"], desc:"<strong>수식 표시 전환</strong> — 셀에 입력된 수식을 보이거나 숨기기" },
+      { keys:["Ctrl","Shift","1"], desc:"<strong>숫자 서식</strong> — 선택한 셀에 천 단위 숫자 서식 적용" },
+      { keys:["Ctrl","Shift","4"], desc:"<strong>통화 서식</strong> — 선택한 셀에 통화(원화 등) 서식 적용" },
+      { keys:["Ctrl","Shift","5"], desc:"<strong>백분율 서식</strong> — 선택한 셀에 백분율 서식 적용" },
+      { keys:["Ctrl","K"], desc:"<strong>링크 삽입</strong> — 선택한 셀에 하이퍼링크 추가" },
+      { keys:["Ctrl","Shift","V"], desc:"<strong>서식 없이 붙여넣기</strong> — 값만 붙여넣고 서식은 제외" },
+      { keys:["F4"], desc:"<strong>마지막 작업 반복</strong> — 직전에 수행한 작업을 반복 적용" },
+    ],
+    excel: [
+      { keys:["Ctrl",";"], desc:"<strong>오늘 날짜 입력</strong> — 선택한 셀에 현재 날짜를 입력" },
+      { keys:["Ctrl","Shift",";"], desc:"<strong>현재 시간 입력</strong> — 선택한 셀에 현재 시간을 입력" },
+      { keys:["Alt","Enter"], desc:"<strong>셀 안에서 줄바꿈</strong> — 한 셀 안에서 다음 줄로 이동" },
+      { keys:["Ctrl","1"], desc:"<strong>셀 서식</strong> — 셀 서식 설정 대화상자 열기" },
+      { keys:["Ctrl","Shift","L"], desc:"<strong>필터</strong> — 선택한 표 범위에 필터 적용/해제" },
+      { keys:["F2"], desc:"<strong>셀 편집</strong> — 선택한 셀을 직접 편집할 수 있는 입력 모드로 전환" },
+      { keys:["F4"], desc:"<strong>마지막 작업 반복</strong> — 직전 작업 반복 또는 셀 참조($) 형식 전환" },
+      { keys:["Ctrl","방향키"], desc:"<strong>데이터 끝으로 이동</strong> — 데이터가 입력된 영역의 끝으로 셀 이동" },
+      { keys:["Ctrl","Shift","방향키"], desc:"<strong>범위 선택</strong> — 데이터 끝까지 범위를 한 번에 선택" },
+      { keys:["Alt","="], desc:"<strong>자동 합계</strong> — 선택한 범위의 합계를 SUM 함수로 자동 입력" },
+      { keys:["Ctrl","Page Up"], desc:"<strong>이전 시트로 이동</strong> — 왼쪽에 있는 시트로 전환" },
+      { keys:["Ctrl","Page Down"], desc:"<strong>다음 시트로 이동</strong> — 오른쪽에 있는 시트로 전환" },
+      { keys:["Ctrl","Shift","$"], desc:"<strong>통화 서식</strong> — 선택한 셀에 통화 형식 적용" },
+      { keys:["Ctrl","Shift","%"], desc:"<strong>백분율 서식</strong> — 선택한 셀에 백분율 형식 적용" },
+      { keys:["Ctrl","Shift","&"], desc:"<strong>테두리 적용</strong> — 선택한 셀 범위에 외곽 테두리 추가" },
+    ],
+    ppt: [
+      { keys:["F5"], desc:"<strong>슬라이드쇼 시작</strong> — 처음 슬라이드부터 발표 시작" },
+      { keys:["Shift","F5"], desc:"<strong>현재 슬라이드부터 시작</strong> — 보고 있던 슬라이드에서 발표 재생" },
+      { keys:["Esc"], desc:"<strong>슬라이드쇼 종료</strong> — 발표 모드를 종료하고 편집 화면으로 복귀" },
+      { keys:["Ctrl","M"], desc:"<strong>새 슬라이드 추가</strong> — 현재 슬라이드 다음에 새 슬라이드 삽입" },
+      { keys:["Ctrl","D"], desc:"<strong>개체 복제</strong> — 선택한 도형이나 텍스트 상자를 복제" },
+      { keys:["Ctrl","G"], desc:"<strong>그룹화</strong> — 선택한 여러 개체를 하나로 그룹 묶기" },
+      { keys:["Ctrl","Shift","G"], desc:"<strong>그룹 해제</strong> — 묶여 있는 그룹을 개별 개체로 해제" },
+      { keys:["Tab"], desc:"<strong>개체 선택 이동</strong> — 슬라이드 안의 다음 개체로 선택 이동" },
+      { keys:["B"], desc:"<strong>화면 검게</strong> — 발표 중 화면을 검은색으로 전환 (다시 누르면 복귀)" },
+      { keys:["W"], desc:"<strong>화면 하얗게</strong> — 발표 중 화면을 흰색으로 전환 (다시 누르면 복귀)" },
+      { keys:["Ctrl","Shift","C"], desc:"<strong>서식 복사</strong> — 선택한 개체의 서식만 복사" },
+      { keys:["Ctrl","Shift","V"], desc:"<strong>서식 붙여넣기</strong> — 복사한 서식을 다른 개체에 적용" },
+      { keys:["Shift","드래그"], desc:"<strong>비율 유지 크기 조절</strong> — 가로세로 비율을 유지하며 개체 크기 조절" },
+      { keys:["Ctrl","Shift",">"], desc:"<strong>글자 크기 키우기</strong> — 선택한 텍스트의 크기를 한 단계 크게" },
+    ],
+    word: [
+      { keys:["Ctrl","B"], desc:"<strong>굵게</strong> — 선택한 텍스트를 굵게 표시" },
+      { keys:["Ctrl","I"], desc:"<strong>기울임꼴</strong> — 선택한 텍스트를 이탤릭으로 표시" },
+      { keys:["Ctrl","U"], desc:"<strong>밑줄</strong> — 선택한 텍스트에 밑줄 추가" },
+      { keys:["Ctrl","E"], desc:"<strong>가운데 정렬</strong> — 문단을 가운데로 정렬" },
+      { keys:["Ctrl","L"], desc:"<strong>왼쪽 정렬</strong> — 문단을 왼쪽으로 정렬" },
+      { keys:["Ctrl","R"], desc:"<strong>오른쪽 정렬</strong> — 문단을 오른쪽으로 정렬" },
+      { keys:["Ctrl","J"], desc:"<strong>양쪽 정렬</strong> — 문단의 양쪽 끝을 맞춰 정렬" },
+      { keys:["Ctrl","1"], desc:"<strong>줄 간격 1배</strong> — 선택한 문단의 줄 간격을 1배로 설정" },
+      { keys:["Ctrl","2"], desc:"<strong>줄 간격 2배</strong> — 선택한 문단의 줄 간격을 2배로 설정" },
+      { keys:["Ctrl","5"], desc:"<strong>줄 간격 1.5배</strong> — 선택한 문단의 줄 간격을 1.5배로 설정" },
+      { keys:["Ctrl","Shift",">"], desc:"<strong>글자 크기 키우기</strong> — 선택한 텍스트의 글자 크기를 한 단계 크게" },
+      { keys:["Ctrl","Shift","<"], desc:"<strong>글자 크기 줄이기</strong> — 선택한 텍스트의 글자 크기를 한 단계 작게" },
+      { keys:["Ctrl","Enter"], desc:"<strong>페이지 나누기</strong> — 현재 위치에서 새 페이지로 이동" },
+      { keys:["Ctrl","Shift","C"], desc:"<strong>서식 복사</strong> — 선택한 텍스트의 서식만 복사" },
+      { keys:["Ctrl","Shift","V"], desc:"<strong>서식 붙여넣기</strong> — 복사한 서식을 다른 텍스트에 적용" },
+      { keys:["Alt","Shift","D"], desc:"<strong>현재 날짜 삽입</strong> — 커서 위치에 오늘 날짜 삽입" },
+      { keys:["Ctrl","K"], desc:"<strong>하이퍼링크 삽입</strong> — 선택한 텍스트에 링크 추가" },
+    ],
+    photoshop: [
+      { keys:["Ctrl","J"], desc:"<strong>레이어 복제</strong> — 선택한 레이어를 그대로 복제" },
+      { keys:["Ctrl","T"], desc:"<strong>자유 변형</strong> — 선택 영역이나 레이어의 크기·회전 조절" },
+      { keys:["Ctrl","Shift","I"], desc:"<strong>선택 영역 반전</strong> — 현재 선택 영역을 반대로 전환" },
+      { keys:["Ctrl","Alt","Z"], desc:"<strong>단계별 실행 취소</strong> — 여러 단계를 차례로 되돌리기" },
+      { keys:["Space"], desc:"<strong>손 도구</strong> — 누르고 있는 동안 화면을 드래그로 이동" },
+      { keys:["Ctrl","+"], desc:"<strong>화면 확대</strong> — 캔버스를 한 단계 확대" },
+      { keys:["Ctrl","-"], desc:"<strong>화면 축소</strong> — 캔버스를 한 단계 축소" },
+      { keys:["Ctrl","0"], desc:"<strong>화면에 맞추기</strong> — 캔버스를 창 크기에 맞춰 표시" },
+      { keys:["B"], desc:"<strong>브러시 도구</strong> — 브러시로 그리기 모드 전환" },
+      { keys:["E"], desc:"<strong>지우개 도구</strong> — 픽셀을 지우는 지우개로 전환" },
+      { keys:["V"], desc:"<strong>이동 도구</strong> — 레이어나 선택 영역을 이동" },
+      { keys:["Ctrl","Shift","N"], desc:"<strong>새 레이어</strong> — 빈 레이어를 새로 추가" },
+      { keys:["Ctrl","E"], desc:"<strong>레이어 병합</strong> — 선택한 레이어를 아래 레이어와 합치기" },
+      { keys:["["], desc:"<strong>브러시 크기 줄이기</strong> — 브러시 크기를 한 단계 작게" },
+      { keys:["]"], desc:"<strong>브러시 크기 늘리기</strong> — 브러시 크기를 한 단계 크게" },
+    ],
+    vscode: [
+      { keys:["Ctrl","`"], desc:"<strong>터미널 열기/닫기</strong> — 통합 터미널 패널 토글" },
+      { keys:["Ctrl","P"], desc:"<strong>파일 빠르게 열기</strong> — 파일 이름을 검색해서 바로 열기" },
+      { keys:["Ctrl","Shift","P"], desc:"<strong>명령어 팔레트</strong> — 모든 명령을 검색해서 실행" },
+      { keys:["Ctrl","/"], desc:"<strong>줄 주석 토글</strong> — 선택한 줄을 주석으로 처리하거나 해제" },
+      { keys:["Ctrl","D"], desc:"<strong>동일 단어 다중 선택</strong> — 같은 단어를 추가로 선택해 동시 편집" },
+      { keys:["Alt","↑ / ↓"], desc:"<strong>줄 이동</strong> — 현재 줄을 위/아래로 이동" },
+      { keys:["Shift","Alt","↓"], desc:"<strong>줄 복제</strong> — 현재 줄을 그대로 복제해 아래에 추가" },
+      { keys:["Ctrl","B"], desc:"<strong>사이드바 토글</strong> — 탐색기 사이드바를 숨기거나 표시" },
+      { keys:["Ctrl","Shift","E"], desc:"<strong>탐색기 포커스</strong> — 파일 탐색기 패널로 이동" },
+      { keys:["Ctrl","Shift","F"], desc:"<strong>전체 검색</strong> — 프로젝트 전체에서 텍스트 검색" },
+      { keys:["Ctrl","Shift","K"], desc:"<strong>줄 삭제</strong> — 현재 줄 전체를 삭제" },
+      { keys:["F12"], desc:"<strong>정의로 이동</strong> — 선택한 함수·변수의 정의 위치로 이동" },
+      { keys:["Ctrl","Space"], desc:"<strong>자동완성 제안</strong> — 코드 자동완성 목록 표시" },
+    ],
+    chrome: [
+      { keys:["Ctrl","T"], desc:"<strong>새 탭 열기</strong> — 새로운 빈 탭을 열기" },
+      { keys:["Ctrl","Shift","T"], desc:"<strong>닫은 탭 다시 열기</strong> — 가장 최근에 닫은 탭을 복구" },
+      { keys:["Ctrl","L"], desc:"<strong>주소창 이동</strong> — 주소 표시줄에 바로 포커스 (Alt+D도 동일)" },
+      { keys:["Ctrl","Shift","N"], desc:"<strong>시크릿 창</strong> — 시크릿 모드의 새 창 열기" },
+      { keys:["Ctrl","1~8"], desc:"<strong>탭 바로가기</strong> — 해당 번호의 탭으로 즉시 이동" },
+      { keys:["Ctrl","Shift","B"], desc:"<strong>북마크바 토글</strong> — 북마크바를 표시하거나 숨기기" },
+      { keys:["Ctrl","J"], desc:"<strong>다운로드 목록</strong> — 다운로드 내역 페이지 열기" },
+      { keys:["Ctrl","Shift","Delete"], desc:"<strong>인터넷 사용 기록 삭제</strong> — 방문 기록·캐시 삭제 창 열기" },
+      { keys:["F11"], desc:"<strong>전체 화면 전환</strong> — 브라우저를 전체 화면으로 표시" },
+      { keys:["Ctrl","+ / -"], desc:"<strong>페이지 확대/축소</strong> — 현재 페이지의 화면 비율 조절" },
+      { keys:["Ctrl","0"], desc:"<strong>확대/축소 초기화</strong> — 페이지 비율을 100%로 복원" },
+    ],
+    notion: [
+      { keys:["Ctrl","N"], desc:"<strong>새 페이지</strong> — 새로운 빈 페이지를 생성" },
+      { keys:["Ctrl","P"], desc:"<strong>빠른 검색</strong> — 페이지와 내용을 빠르게 검색" },
+      { keys:["/"], desc:"<strong>슬래시 명령어</strong> — 입력 중 블록 종류(제목, 표, 목록 등)를 선택" },
+      { keys:["Tab"], desc:"<strong>들여쓰기</strong> — 현재 블록을 한 단계 하위 항목으로 이동" },
+      { keys:["Shift","Tab"], desc:"<strong>내어쓰기</strong> — 현재 블록을 한 단계 상위 항목으로 이동" },
+      { keys:["Ctrl","Shift","Enter"], desc:"<strong>할 일 완료 토글</strong> — 체크박스 항목을 완료/미완료로 전환" },
+      { keys:["Ctrl","Shift","\\\\"], desc:"<strong>코드 블록 전환</strong> — 선택한 텍스트를 코드 블록으로 변경" },
+      { keys:["Ctrl","Shift","L"], desc:"<strong>다크 모드 전환</strong> — 노션 화면을 다크/라이트 모드로 전환" },
+      { keys:["Ctrl","Enter"], desc:"<strong>페이지 전체화면 열기</strong> — 현재 항목을 전체 페이지로 열기" },
+      { keys:["Ctrl","Shift","U"], desc:"<strong>상위 페이지로 이동</strong> — 한 단계 위 페이지로 이동" },
+    ],
+    slack: [
+      { keys:["Ctrl","K"], desc:"<strong>빠른 채널 전환</strong> — 채널·DM·사람을 검색해 바로 이동" },
+      { keys:["Ctrl","Shift","K"], desc:"<strong>새 메시지 작성</strong> — 새로운 다이렉트 메시지 시작" },
+      { keys:["Ctrl","Shift","A"], desc:"<strong>멘션 및 반응 보기</strong> — 나에게 온 멘션·이벤트 모음 열기" },
+      { keys:["Shift","Enter"], desc:"<strong>줄바꿈</strong> — 메시지 입력 중 줄바꿈 (전송하지 않음)" },
+      { keys:["Enter"], desc:"<strong>메시지 전송</strong> — 입력한 메시지를 채널에 전송" },
+      { keys:["Ctrl","F"], desc:"<strong>채널 내 검색</strong> — 현재 채널의 메시지 검색" },
+      { keys:["Esc"], desc:"<strong>입력 취소 / 닫기</strong> — 작성 중인 메시지를 취소하거나 창 닫기" },
+      { keys:["Alt","↑ / ↓"], desc:"<strong>채널 이동</strong> — 이전/다음 채널로 순서대로 이동" },
+      { keys:["Ctrl","."], desc:"<strong>사이드바 토글</strong> — 좌측 채널 목록을 숨기거나 표시" },
+      { keys:["Ctrl","/"], desc:"<strong>단축키 목록 보기</strong> — 슬랙의 전체 단축키 안내 열기" },
+    ],
+    zoom: [
+      { keys:["Alt","A"], desc:"<strong>음소거 전환</strong> — 마이크를 켜거나 끄기" },
+      { keys:["Alt","V"], desc:"<strong>비디오 전환</strong> — 카메라를 켜거나 끄기" },
+      { keys:["Alt","S"], desc:"<strong>화면 공유 시작/중지</strong> — 내 화면을 공유하거나 종료" },
+      { keys:["Alt","R"], desc:"<strong>녹화 시작/중지</strong> — 회의 녹화를 시작하거나 멈춤" },
+      { keys:["Alt","Y"], desc:"<strong>손들기 토글</strong> — 손들기 표시를 켜거나 끄기" },
+      { keys:["Alt","F"], desc:"<strong>전체 화면 전환</strong> — 회의 화면을 전체 화면으로 표시" },
+      { keys:["Alt","M"], desc:"<strong>전체 참가자 음소거</strong> — 호스트가 모든 참가자를 음소거" },
+      { keys:["Space"], desc:"<strong>임시 음소거 해제</strong> — 음소거 상태에서 누르고 있는 동안 발언 가능" },
+      { keys:["Alt","H"], desc:"<strong>채팅 패널 토글</strong> — 채팅창을 열거나 닫기" },
+      { keys:["Alt","Q"], desc:"<strong>회의 나가기/종료</strong> — 회의 종료 대화상자 열기" },
+    ],
+    figma: [
+      { keys:["Ctrl","D"], desc:"<strong>객체 복제</strong> — 선택한 요소를 그대로 복제" },
+      { keys:["V"], desc:"<strong>이동 도구</strong> — 객체 선택 및 이동 모드로 전환" },
+      { keys:["R"], desc:"<strong>사각형 도구</strong> — 사각형을 그리는 도구로 전환" },
+      { keys:["O"], desc:"<strong>원형 도구</strong> — 타원/원을 그리는 도구로 전환" },
+      { keys:["T"], desc:"<strong>텍스트 도구</strong> — 텍스트 박스를 추가하는 도구로 전환" },
+      { keys:["Ctrl","G"], desc:"<strong>그룹화</strong> — 선택한 여러 객체를 하나의 그룹으로 묶기" },
+      { keys:["Ctrl","Alt","G"], desc:"<strong>프레임으로 묶기</strong> — 선택 영역을 프레임으로 변환" },
+      { keys:["Shift","A"], desc:"<strong>자동 레이아웃 적용</strong> — 선택한 요소에 오토 레이아웃 추가" },
+      { keys:["Ctrl","/"], desc:"<strong>빠른 실행</strong> — 명령어와 기능을 검색해서 실행" },
+      { keys:["Ctrl","Shift","K"], desc:"<strong>컴포넌트 만들기</strong> — 선택한 요소를 재사용 가능한 컴포넌트로 변환" },
+      { keys:["Ctrl","\\\\"], desc:"<strong>UI 패널 토글</strong> — 좌우 패널을 숨기거나 표시" },
+    ],
+    hwp: [
+      { keys:["Alt","X"], desc:"<strong>한자 변환</strong> — 입력한 한글 단어를 한자로 변환" },
+      { keys:["Ctrl","F10"], desc:"<strong>특수 문자 입력</strong> — 특수 문자표를 열어 기호 삽입" },
+      { keys:["Alt","L"], desc:"<strong>글자 모양</strong> — 글꼴, 크기, 색상 등을 설정하는 대화상자 열기" },
+      { keys:["Alt","T"], desc:"<strong>문단 모양</strong> — 정렬, 줄 간격, 여백 등을 설정하는 대화상자 열기" },
+      { keys:["Ctrl","Enter"], desc:"<strong>쪽 나누기</strong> — 현재 위치에서 다음 페이지로 넘기기" },
+      { keys:["Ctrl","Home"], desc:"<strong>문서 처음으로 이동</strong> — 커서를 문서의 맨 앞으로 이동" },
+      { keys:["Ctrl","End"], desc:"<strong>문서 끝으로 이동</strong> — 커서를 문서의 맨 뒤로 이동" },
+      { keys:["F5"], desc:"<strong>선택 모드 시작</strong> — 방향키로 글자·문단·구역을 블록 지정" },
+    ],
+  };
+
+  // ===================== 카테고리 메타 정보 (PNG 저장용) =====================
+  const CATEGORY_META = {
+    general:   { name:'전체 공통',     color:'var(--c-general)',   text:'#1b1306' },
+    sheets:    { name:'Google Sheets', color:'var(--c-sheets)',    text:'#ffffff' },
+    excel:     { name:'Excel',         color:'var(--c-excel)',     text:'#1a2e05' },
+    ppt:       { name:'PowerPoint',    color:'var(--c-ppt)',       text:'#3a0a12' },
+    word:      { name:'Word',          color:'var(--c-word)',      text:'#ffffff' },
+    photoshop: { name:'Photoshop',     color:'var(--c-photoshop)', text:'#ffffff' },
+    vscode:    { name:'VS Code',       color:'var(--c-vscode)',    text:'#042f33' },
+    chrome:    { name:'Chrome',        color:'var(--c-chrome)',    text:'#3a1d02' },
+    notion:    { name:'Notion',        color:'var(--c-notion)',    text:'#ffffff' },
+    slack:     { name:'Slack',         color:'var(--c-slack)',     text:'#ffffff' },
+    zoom:      { name:'Zoom',          color:'var(--c-zoom)',      text:'#ffffff' },
+    figma:     { name:'Figma',         color:'var(--c-figma)',     text:'#ffffff' },
+    hwp:       { name:'한글(HWP)',     color:'var(--c-hwp)',       text:'#ffffff' },
+  };
+
+  // ===================== 카드 렌더링 =====================
+  document.documentElement.classList.add('js');
+
+  function renderCards(){
+    Object.keys(DATA).forEach(catKey=>{
+      const grid = document.getElementById('grid-'+catKey);
+      const frag = document.createDocumentFragment();
+      DATA[catKey].forEach(item=>{
+        const card = document.createElement('article');
+        card.className = 'shortcut-card pre-reveal';
+
+        const search = (item.keys.join(' ') + ' ' + item.desc.replace(/<[^>]+>/g,'')).toLowerCase();
+        card.dataset.search = search;
+
+        const combo = document.createElement('div');
+        combo.className = 'key-combo';
+        item.keys.forEach((k, i)=>{
+          const span = document.createElement('span');
+          span.className = 'key';
+          span.textContent = k;
+          combo.appendChild(span);
+          if(i < item.keys.length - 1){
+            const plus = document.createElement('span');
+            plus.className = 'key-plus-small';
+            plus.textContent = '+';
+            combo.appendChild(plus);
+          }
+        });
+
+        const desc = document.createElement('p');
+        desc.className = 'desc';
+        desc.innerHTML = item.desc;
+
+        const saveIcon = document.createElement('span');
+        saveIcon.className = 'save-icon';
+        saveIcon.innerHTML = '⬇';
+        saveIcon.title = 'PNG로 저장';
+
+        card.appendChild(combo);
+        card.appendChild(desc);
+        card.appendChild(saveIcon);
+        card.addEventListener('click', ()=>saveCardAsImage(card, item.keys, catKey));
+        frag.appendChild(card);
+      });
+      grid.appendChild(frag);
+    });
+  }
+  renderCards();
+
+  // ===================== 카드 PNG로 저장 =====================
+  function saveCardAsImage(card, keys, catKey){
+    if(typeof html2canvas === 'undefined'){
+      console.error('html2canvas 라이브러리를 불러오지 못했습니다.');
+      return;
+    }
+    const meta = CATEGORY_META[catKey] || { name:'', color:'var(--accent)', text:'#1b1306' };
+
+    const cardStyle = getComputedStyle(card);
+    const cardWidth = card.offsetWidth;
+
+    // 카드 배경색 (투명일 경우 surface 색상으로 대체)
+    let bgColor = cardStyle.backgroundColor;
+    if(!bgColor || bgColor === 'transparent' || bgColor === 'rgba(0, 0, 0, 0)'){
+      bgColor = getComputedStyle(document.documentElement).getPropertyValue('--surface').trim();
+    }
+
+    // 캡처용 임시 래퍼 (화면 밖에 렌더링, 모서리를 채우기 위해 직사각형으로 캡처)
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'fixed';
+    wrapper.style.left = '-9999px';
+    wrapper.style.top = '0';
+    wrapper.style.width = cardWidth + 'px';
+    wrapper.style.background = bgColor;
+    wrapper.style.border = '1px solid ' + cardStyle.borderColor;
+    wrapper.style.borderRadius = '0';
+    wrapper.style.overflow = 'hidden';
+    wrapper.style.fontFamily = cardStyle.fontFamily;
+
+    // 상단 프로그램 표시 바
+    const header = document.createElement('div');
+    header.textContent = meta.name;
+    header.style.background = meta.color;
+    header.style.color = meta.text;
+    header.style.fontFamily = "'JetBrains Mono', monospace";
+    header.style.fontWeight = '700';
+    header.style.fontSize = '.78rem';
+    header.style.letterSpacing = '.06em';
+    header.style.padding = '10px 20px';
+
+    // 카드 내용 (저장 아이콘 제외하고 복제)
+    const content = document.createElement('div');
+    content.style.padding = '20px';
+    content.appendChild(card.querySelector('.key-combo').cloneNode(true));
+    content.appendChild(card.querySelector('.desc').cloneNode(true));
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(content);
+    document.body.appendChild(wrapper);
+
+    html2canvas(wrapper, { backgroundColor: bgColor, scale: 2 }).then(canvas=>{
+      document.body.removeChild(wrapper);
+
+      const fileName = keys.join(' + ')
+        .replace(/[\\/:*?"<>|]/g, '-')
+        .trim() + '.png';
+
+      const link = document.createElement('a');
+      link.download = fileName;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+
+      card.classList.add('saved');
+      setTimeout(()=>card.classList.remove('saved'), 1200);
+    }).catch(err=>{
+      document.body.removeChild(wrapper);
+      console.error('이미지 저장 중 오류가 발생했습니다.', err);
+    });
+  }
+
+  // ===================== 스크롤 시 카드 등장 애니메이션 =====================
+  const cards = document.querySelectorAll('.shortcut-card');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+    cards.forEach(c=>io.observe(c));
+  } else {
+    cards.forEach(c=>c.classList.add('visible'));
+  }
+
+  // ===================== 탭 네비게이션 =====================
+  const tabs = document.querySelectorAll('.tab-btn');
+  const sections = document.querySelectorAll('.section');
+  const tabsEl = document.getElementById('tabs');
+  const tabsPrev = document.getElementById('tabsPrev');
+  const tabsNext = document.getElementById('tabsNext');
+
+  function updateTabArrows(){
+    const maxScroll = tabsEl.scrollWidth - tabsEl.clientWidth;
+    tabsPrev.disabled = tabsEl.scrollLeft <= 2;
+    tabsNext.disabled = tabsEl.scrollLeft >= maxScroll - 2;
+  }
+  updateTabArrows();
+  tabsEl.addEventListener('scroll', updateTabArrows);
+  window.addEventListener('resize', updateTabArrows);
+
+  tabsPrev.addEventListener('click', ()=>{
+    tabsEl.scrollBy({ left: -tabsEl.clientWidth * 0.6, behavior:'smooth' });
+  });
+  tabsNext.addEventListener('click', ()=>{
+    tabsEl.scrollBy({ left: tabsEl.clientWidth * 0.6, behavior:'smooth' });
+  });
+
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      const target = document.getElementById(tab.dataset.target);
+      const offset = document.querySelector('.controls').offsetHeight + 10;
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - offset,
+        behavior:'smooth'
+      });
+      tab.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+    });
+  });
+
+  if('IntersectionObserver' in window){
+    const sectionObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          tabs.forEach(t=>t.classList.remove('active'));
+          const activeTab = document.querySelector(`.tab-btn[data-target="${entry.target.id}"]`);
+          if(activeTab){
+            activeTab.classList.add('active');
+            activeTab.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+          }
+        }
+      });
+    }, { rootMargin:'-45% 0px -45% 0px', threshold:0 });
+    sections.forEach(s=>sectionObserver.observe(s));
+  }
+
+  // ===================== 검색 =====================
+  const searchInput = document.getElementById('searchInput');
+  const noResult = document.getElementById('noResult');
+
+  searchInput.addEventListener('input', ()=>{
+    const q = searchInput.value.trim().toLowerCase();
+    let totalVisible = 0;
+
+    sections.forEach(section=>{
+      const sectionCards = section.querySelectorAll('.shortcut-card');
+      let visibleInSection = 0;
+
+      sectionCards.forEach(card=>{
+        const match = q === '' || card.dataset.search.includes(q);
+        card.style.display = match ? '' : 'none';
+        if(match){
+          visibleInSection++;
+          totalVisible++;
+          card.classList.add('visible');
+        }
+      });
+
+      section.style.display = visibleInSection > 0 ? '' : 'none';
+    });
+
+    noResult.classList.toggle('show', totalVisible === 0);
+  });
+
+  // ===================== 맨 위로 버튼 =====================
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', ()=>{
+    toTop.classList.toggle('show', window.scrollY > 480);
+  });
+  toTop.addEventListener('click', ()=>{
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+</script>
+</body>
+</html>
