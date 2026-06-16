@@ -101,6 +101,7 @@
     justify-content:center;
     position:relative;
     margin-bottom:26px;
+    padding-right:52px; /* 테마 토글 버튼 너비(42px) + 여백 확보 */
   }
   .hero .eyebrow{
     display:inline-flex;
@@ -108,13 +109,14 @@
     gap:8px;
     font-family:'JetBrains Mono',monospace;
     font-size:.78rem;
-    letter-spacing:.22em;
+    letter-spacing:.18em;
     text-transform:uppercase;
     color:var(--accent);
     background:var(--accent-soft);
     border:1px solid rgba(245,166,35,.3);
     border-radius:999px;
-    padding:7px 18px;
+    padding:7px 16px;
+    max-width:100%;
   }
   [data-theme="dark"] .hero .eyebrow{border-color:rgba(255,180,84,.3);}
   .hero .eyebrow::before{
@@ -677,6 +679,7 @@
   /* ===== 반응형 ===== */
   @media (max-width:640px){
     .hero{padding:20px 0 36px;}
+    .hero .eyebrow{font-size:.68rem; letter-spacing:.12em; padding:6px 13px;}
     .keyboard-stage{gap:6px;}
     .keycap{padding:10px 14px; font-size:.82rem;}
     .keycap.wide{padding:10px 20px;}
