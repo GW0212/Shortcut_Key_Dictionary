@@ -1988,7 +1988,11 @@
   // ===================== 맨 위로 버튼 =====================
   const toTop = document.getElementById('toTop');
   toTop.addEventListener('click', ()=>{
+    isTabScrolling = true;
+    clearTimeout(tabScrollTimer);
+    setActiveTab('general');
     window.scrollTo({ top:0, behavior:'smooth' });
+    tabScrollTimer = setTimeout(()=>{ isTabScrolling = false; }, 800);
   });
 </script>
 </body>
