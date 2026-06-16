@@ -44,6 +44,10 @@
     --c-macos:#94a3b8;
     --c-outlook:#0ea5e9;
     --c-youtube:#f43f5e;
+    --c-discord:#818cf8;
+    --c-teams:#7c3aed;
+    --c-premiere:#ea580c;
+    --c-intellij:#ec4899;
 
     --fav:#f59e0b;
 
@@ -697,13 +701,96 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce){
+  /* ===== 스크롤 진행 바 ===== */
+  .scroll-bar{
+    position:fixed;
+    top:0; left:0;
+    height:3px;
+    width:0%;
+    background:linear-gradient(90deg, var(--accent), var(--c-sheets));
+    z-index:999;
+    transition:width .1s linear;
+    border-radius:0 2px 2px 0;
+  }
+
+  /* ===== 히어로 카운터 뱃지 ===== */
+  .hero-counter{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;
+    font-weight:700;
+    color:var(--text-muted);
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:6px 14px;
+    margin-top:16px;
+  }
+  .hero-counter .count-num{
+    color:var(--accent);
+    font-size:.88rem;
+  }
+
+  /* ===== 탭 뱃지 (단축키 개수) ===== */
+  .tab-btn .tab-count{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    font-weight:700;
+    opacity:.7;
+    background:var(--surface-light);
+    border-radius:999px;
+    padding:1px 6px;
+    margin-left:2px;
+    transition:background-color .3s ease;
+  }
+  .tab-btn.active .tab-count{
+    background:rgba(0,0,0,.15);
+    opacity:1;
+  }
+
+  /* ===== 검색 하이라이트 ===== */
+  .search-highlight{
+    background:rgba(245,166,35,.35);
+    border-radius:3px;
+    padding:0 2px;
+  }
+  [data-theme="dark"] .search-highlight{
+    background:rgba(255,180,84,.28);
+  }
+
+  /* ===== 카드 빈도 태그 ===== */
+  .card-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    font-size:.7rem;
+    font-weight:700;
+    border-radius:999px;
+    padding:2px 9px;
+    margin-bottom:10px;
+    letter-spacing:.02em;
+  }
+  .card-tag.hot{
+    background:rgba(239,68,68,.1);
+    color:#ef4444;
+  }
+  .card-tag.tip{
+    background:rgba(99,102,241,.1);
+    color:#6366f1;
+  }
+  [data-theme="dark"] .card-tag.hot{ background:rgba(239,68,68,.18); }
+  [data-theme="dark"] .card-tag.tip{ background:rgba(99,102,241,.18); }
+
+
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
     html{scroll-behavior:auto;}
   }
 </style>
 </head>
 <body>
+  <div class="scroll-bar" id="scrollBar"></div>
 
   <section class="hero">
     <div class="wrap">
@@ -715,6 +802,7 @@
         </button>
       </div>
       <h1><span class="accent-word">단축키 사전</span></h1>
+      <div><span class="hero-counter" id="heroCounter"><span class="count-num" id="totalCount">0</span>개 단축키 수록</span></div>
 
       <div class="keyboard-stage" aria-hidden="true">
         <span class="keycap">Ctrl</span>
@@ -768,6 +856,10 @@
           <button class="tab-btn" data-target="macos" style="--dot-color:var(--c-macos)"><span class="dot"></span>macOS</button>
           <button class="tab-btn" data-target="outlook" style="--dot-color:var(--c-outlook)"><span class="dot"></span>Outlook</button>
           <button class="tab-btn" data-target="youtube" style="--dot-color:var(--c-youtube)"><span class="dot"></span>YouTube</button>
+          <button class="tab-btn" data-target="discord" style="--dot-color:var(--c-discord)"><span class="dot"></span>Discord</button>
+          <button class="tab-btn" data-target="teams" style="--dot-color:var(--c-teams)"><span class="dot"></span>Teams</button>
+          <button class="tab-btn" data-target="premiere" style="--dot-color:var(--c-premiere)"><span class="dot"></span>Premiere</button>
+          <button class="tab-btn" data-target="intellij" style="--dot-color:var(--c-intellij)"><span class="dot"></span>IntelliJ</button>
         </nav>
         <button class="tabs-arrow" id="tabsNext" aria-label="다음 카테고리">→</button>
       </div>
@@ -937,6 +1029,46 @@
     </section>
 
     <p class="no-result" id="noResult">검색 결과가 없습니다. 다른 키워드로 검색해보세요.</p>
+
+    <!-- ===== Discord ===== -->
+    <section class="section" id="discord" style="--cat-color:var(--c-discord)">
+      <div class="section-head">
+        <span class="tag">Discord</span>
+        <h2>디스코드 단축키</h2>
+        <p>채널 이동, 음소거, DM 관리를 빠르게 해주는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-discord"></div>
+    </section>
+
+    <!-- ===== Teams ===== -->
+    <section class="section" id="teams" style="--cat-color:var(--c-teams)">
+      <div class="section-head">
+        <span class="tag">Microsoft Teams</span>
+        <h2>팀즈 단축키</h2>
+        <p>회의 제어, 채팅, 화면 공유를 빠르게 처리하는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-teams"></div>
+    </section>
+
+    <!-- ===== Premiere ===== -->
+    <section class="section" id="premiere" style="--cat-color:var(--c-premiere)">
+      <div class="section-head">
+        <span class="tag">Adobe Premiere Pro</span>
+        <h2>프리미어 프로 단축키</h2>
+        <p>영상 편집과 타임라인 작업을 빠르게 해주는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-premiere"></div>
+    </section>
+
+    <!-- ===== IntelliJ ===== -->
+    <section class="section" id="intellij" style="--cat-color:var(--c-intellij)">
+      <div class="section-head">
+        <span class="tag">IntelliJ IDEA</span>
+        <h2>IntelliJ 단축키</h2>
+        <p>코드 탐색, 리팩토링, 디버깅을 빠르게 하는 단축키입니다.</p>
+      </div>
+      <div class="grid" id="grid-intellij"></div>
+    </section>
 
   </main>
 
@@ -1254,6 +1386,57 @@
       { keys:["I"], desc:"<strong>미니 플레이어</strong> — 화면 한쪽 구석에 작은 플레이어로 전환" },
       { keys:["0~9"], desc:"<strong>구간 이동</strong> — 영상 길이의 0~90% 지점으로 바로 이동" },
     ],
+    discord: [
+      { keys:["Ctrl","K"], desc:"<strong>빠른 채널 전환</strong> — 서버·채널·DM을 검색해서 바로 이동" },
+      { keys:["Alt","↑ / ↓"], desc:"<strong>읽지 않은 채널 이동</strong> — 읽지 않은 채널이나 DM으로 순서대로 이동" },
+      { keys:["Ctrl","Shift","M"], desc:"<strong>음소거 전환</strong> — 마이크를 켜거나 끄기" },
+      { keys:["Ctrl","Shift","D"], desc:"<strong>헤드셋 전환</strong> — 헤드폰/스피커를 켜거나 끄기" },
+      { keys:["Ctrl","/"], desc:"<strong>단축키 목록 보기</strong> — 디스코드 전체 단축키 안내 열기" },
+      { keys:["Ctrl","Shift","N"], desc:"<strong>새 서버 만들기</strong> — 새 서버 생성 창 열기" },
+      { keys:["Ctrl","F"], desc:"<strong>메시지 검색</strong> — 현재 채널/DM에서 메시지 검색" },
+      { keys:["Ctrl","E"], desc:"<strong>이모지 검색</strong> — 이모지 선택 창 열기" },
+      { keys:["↑"], desc:"<strong>마지막 메시지 수정</strong> — 입력창 비어있을 때 눌러 내 마지막 메시지 수정" },
+      { keys:["Esc"], desc:"<strong>읽음 처리</strong> — 현재 채널의 모든 메시지를 읽음으로 표시" },
+    ],
+    teams: [
+      { keys:["Ctrl","Shift","M"], desc:"<strong>음소거 전환</strong> — 회의 중 마이크를 켜거나 끄기" },
+      { keys:["Ctrl","Shift","O"], desc:"<strong>카메라 전환</strong> — 회의 중 카메라를 켜거나 끄기" },
+      { keys:["Ctrl","Shift","E"], desc:"<strong>화면 공유 시작/중지</strong> — 내 화면을 공유하거나 종료" },
+      { keys:["Ctrl","Shift","K"], desc:"<strong>손들기 토글</strong> — 손들기 표시를 켜거나 끄기" },
+      { keys:["Ctrl","Shift","H"], desc:"<strong>배경 흐리기</strong> — 회의 배경 흐림 효과 전환" },
+      { keys:["Ctrl","1"], desc:"<strong>활동 피드 이동</strong> — 최신 알림·활동 피드로 이동" },
+      { keys:["Ctrl","2"], desc:"<strong>채팅 이동</strong> — 채팅 탭으로 이동" },
+      { keys:["Ctrl","3"], desc:"<strong>팀 목록 이동</strong> — 팀 탭으로 이동" },
+      { keys:["Ctrl","E"], desc:"<strong>검색 이동</strong> — 상단 검색창으로 포커스 이동" },
+      { keys:["Ctrl","Shift","Enter"], desc:"<strong>회의 수락</strong> — 수신 중인 통화/회의 요청을 수락" },
+    ],
+    premiere: [
+      { keys:["Space"], desc:"<strong>재생/정지</strong> — 타임라인 재생 또는 일시정지" },
+      { keys:["I"], desc:"<strong>인 포인트 설정</strong> — 현재 위치를 클립 시작점(In)으로 지정" },
+      { keys:["O"], desc:"<strong>아웃 포인트 설정</strong> — 현재 위치를 클립 끝점(Out)으로 지정" },
+      { keys:["V"], desc:"<strong>선택 도구</strong> — 기본 선택 도구로 전환" },
+      { keys:["C"], desc:"<strong>자르기 도구</strong> — 클립을 자르는 면도날 도구로 전환" },
+      { keys:["Ctrl","K"], desc:"<strong>현재 위치에서 자르기</strong> — 재생헤드 위치에서 클립을 자르기" },
+      { keys:["Ctrl","Z"], desc:"<strong>실행 취소</strong> — 마지막 편집 작업을 취소" },
+      { keys:["Ctrl","M"], desc:"<strong>미디어 내보내기</strong> — 영상 내보내기 설정 창 열기" },
+      { keys:["Ctrl","I"], desc:"<strong>미디어 가져오기</strong> — 영상·음원·이미지 파일 불러오기" },
+      { keys:["Shift","Delete"], desc:"<strong>리플 삭제</strong> — 클립을 삭제하고 뒤 클립을 자동으로 당기기" },
+      { keys:["Ctrl","D"], desc:"<strong>기본 전환 적용</strong> — 선택 클립에 기본 전환 효과(트랜지션) 적용" },
+    ],
+    intellij: [
+      { keys:["Shift","Shift"], desc:"<strong>어디서나 검색(Search Everywhere)</strong> — 파일·클래스·심볼·액션을 한 번에 검색" },
+      { keys:["Ctrl","Shift","F"], desc:"<strong>전체 검색</strong> — 프로젝트 전체에서 텍스트 검색" },
+      { keys:["Ctrl","Shift","R"], desc:"<strong>전체 치환</strong> — 프로젝트 전체에서 텍스트 찾아 바꾸기" },
+      { keys:["Ctrl","N"], desc:"<strong>클래스 찾기</strong> — 클래스 이름으로 바로 이동" },
+      { keys:["Ctrl","Shift","N"], desc:"<strong>파일 찾기</strong> — 파일 이름으로 바로 이동" },
+      { keys:["Alt","Enter"], desc:"<strong>빠른 수정</strong> — 오류·경고에 대한 수정 제안 보기" },
+      { keys:["Ctrl","Alt","L"], desc:"<strong>코드 서식 정리</strong> — 현재 파일의 들여쓰기·코드 포맷을 자동 정리" },
+      { keys:["Ctrl","Alt","O"], desc:"<strong>Import 최적화</strong> — 사용하지 않는 import 구문을 자동 제거" },
+      { keys:["Shift","F6"], desc:"<strong>이름 변경(Rename)</strong> — 변수·함수·클래스명을 프로젝트 전체에서 한번에 변경" },
+      { keys:["Ctrl","B"], desc:"<strong>정의로 이동</strong> — 선택한 심볼의 정의 위치로 바로 이동" },
+      { keys:["Ctrl","Alt","←"], desc:"<strong>이전 위치로 이동</strong> — 방금 전 편집 위치로 되돌아가기" },
+      { keys:["F9"], desc:"<strong>디버그 실행 재개</strong> — 중단점(Breakpoint)에서 실행을 다시 재개" },
+    ],
   };
 
   // ===================== 카테고리 메타 정보 (PNG 저장용) =====================
@@ -1274,6 +1457,10 @@
     macos:     { name:'macOS',         color:'var(--c-macos)',     text:'#1f2430' },
     outlook:   { name:'Outlook',       color:'var(--c-outlook)',   text:'#ffffff' },
     youtube:   { name:'YouTube',       color:'var(--c-youtube)',   text:'#ffffff' },
+    discord:   { name:'Discord',       color:'var(--c-discord)',   text:'#ffffff' },
+    teams:     { name:'Microsoft Teams', color:'var(--c-teams)',   text:'#ffffff' },
+    premiere:  { name:'Premiere Pro',  color:'var(--c-premiere)',  text:'#ffffff' },
+    intellij:  { name:'IntelliJ IDEA', color:'var(--c-intellij)',  text:'#ffffff' },
   };
 
   // ===================== 카드 렌더링 =====================
@@ -1318,6 +1505,79 @@
   }
   function favId(catKey, keys){ return catKey + '::' + keys.join('+'); }
 
+  // ===================== HOT / TIP 태그 (3번: 빈도 뱃지) =====================
+  const HOT_KEYS = new Set([
+    'general::Ctrl+C','general::Ctrl+V','general::Ctrl+Z','general::Ctrl+S','general::Ctrl+A',
+    'general::Alt+Tab','general::Ctrl+F','general::Win+D',
+    'sheets::Ctrl+方向키','sheets::Ctrl+Shift+方向키','sheets::Alt+=',
+    'excel::Alt+=','excel::Ctrl+Shift+L','excel::F2',
+    'ppt::F5','ppt::Ctrl+D',
+    'word::Ctrl+B','word::Ctrl+E','word::Ctrl+Enter',
+    'photoshop::Ctrl+T','photoshop::Ctrl+J',
+    'vscode::Ctrl+Shift+P','vscode::Ctrl+D','vscode::F12',
+    'chrome::Ctrl+T','chrome::Ctrl+L','chrome::Ctrl+Shift+T',
+    'notion::/','slack::Ctrl+K','zoom::Alt+A','zoom::Space',
+    'figma::Ctrl+D','macos::Cmd+Space','teams::Ctrl+Shift+M',
+    'premiere::Ctrl+K','intellij::Shift+Shift',
+  ]);
+  const TIP_KEYS = new Set([
+    'general::Win+Shift+S','general::Ctrl+Shift+Esc','general::Ctrl+Shift+T',
+    'excel::F11','excel::Ctrl+T',
+    'word::Ctrl+Shift+E','word::Ctrl+Shift+Space',
+    'photoshop::Alt+Backspace','photoshop::X',
+    'vscode::Ctrl+G','vscode::F2',
+    'chrome::Ctrl+D','figma::Shift+A','figma::Ctrl+Alt+C',
+    'notion::Ctrl+D','slack::↑','zoom::Alt+P',
+    'macos::Cmd+Shift+5','intellij::Ctrl+Alt+L','intellij::Shift+F6',
+    'discord::Esc','premiere::Shift+Delete',
+  ]);
+
+  // ===================== 총 단축키 카운터 (1번) =====================
+  let totalShortcutCount = 0;
+  Object.keys(DATA).forEach(k => totalShortcutCount += DATA[k].length);
+  const totalCountEl = document.getElementById('totalCount');
+  if(totalCountEl) totalCountEl.textContent = totalShortcutCount;
+
+  // ===================== 탭 뱃지 카운트 업데이트 (8번) =====================
+  function updateTabCounts(){
+    Object.keys(DATA).forEach(catKey=>{
+      const btn = document.querySelector(`.tab-btn[data-target="${catKey}"]`);
+      if(!btn) return;
+      let badge = btn.querySelector('.tab-count');
+      if(!badge){
+        badge = document.createElement('span');
+        badge.className = 'tab-count';
+        btn.appendChild(badge);
+      }
+      badge.textContent = DATA[catKey].length;
+    });
+  }
+  updateTabCounts();
+
+  // ===================== 검색 하이라이트 헬퍼 (6번) =====================
+  function highlightText(el, q){
+    if(!q){ return; }
+    el.childNodes.forEach(node=>{
+      if(node.nodeType === 3 && node.textContent.trim()){
+        const escaped = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+        const regex = new RegExp(`(${escaped})`,'gi');
+        if(regex.test(node.textContent)){
+          const span = document.createElement('span');
+          span.innerHTML = node.textContent.replace(regex,'<mark class="search-highlight">$1</mark>');
+          node.parentNode.replaceChild(span, node);
+        }
+      }
+    });
+  }
+  function clearHighlights(card){
+    card.querySelectorAll('mark.search-highlight').forEach(m=>{
+      const parent = m.parentNode;
+      parent.replaceChild(document.createTextNode(m.textContent), m);
+      parent.normalize();
+    });
+    // desc innerHTML을 원본으로 되돌리는 건 data-orig-desc로 관리
+  }
+
   function renderCards(){
     Object.keys(DATA).forEach(catKey=>{
       const grid = document.getElementById('grid-'+catKey);
@@ -1328,17 +1588,35 @@
 
         const search = (item.keys.join(' ') + ' ' + item.desc.replace(/<[^>]+>/g,'')).toLowerCase();
         card.dataset.search = search;
+        card.dataset.cat = catKey;
+        card.dataset.keys = item.keys.join('+');
 
         const id = favId(catKey, item.keys);
         card.dataset.fav = favorites.has(id) ? '1' : '0';
+
+        // ===== 3번: 빈도 태그 =====
+        const tagId = catKey + '::' + item.keys.join('+');
+        if(HOT_KEYS.has(tagId)){
+          const tag = document.createElement('div');
+          tag.className = 'card-tag hot';
+          tag.innerHTML = '🔥 자주 씀';
+          card.appendChild(tag);
+        } else if(TIP_KEYS.has(tagId)){
+          const tag = document.createElement('div');
+          tag.className = 'card-tag tip';
+          tag.innerHTML = '💡 꿀팁';
+          card.appendChild(tag);
+        }
 
         const combo = buildKeyCombo(item.keys);
 
         const desc = document.createElement('p');
         desc.className = 'desc';
         desc.innerHTML = item.desc;
+        // 원본 desc 저장 (하이라이트 복원용)
+        desc.dataset.orig = item.desc;
 
-        // 아이콘 영역 (즐겨찾기 / 복사 / PNG 저장)
+        // 아이콘 영역 (즐겨찾기 / 복사 / 공유 / PNG 저장)
         const icons = document.createElement('div');
         icons.className = 'card-icons';
 
@@ -1380,6 +1658,23 @@
           }
         });
 
+        // ===== 5번: 공유 버튼 =====
+        const shareIcon = document.createElement('span');
+        shareIcon.className = 'icon-btn share-icon';
+        shareIcon.title = '이 단축키 공유';
+        shareIcon.innerHTML = '🔗';
+        shareIcon.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          const url = location.origin + location.pathname + '?cat=' + catKey + '&key=' + encodeURIComponent(item.keys.join('+'));
+          if(navigator.share){
+            navigator.share({ title:'단축키 사전', text: item.keys.join(' + ') + ' — ' + item.desc.replace(/<[^>]+>/g,''), url });
+          } else if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(url).then(()=>{
+              showToast('링크가 복사되었습니다!');
+            });
+          }
+        });
+
         const saveIcon = document.createElement('span');
         saveIcon.className = 'icon-btn save-icon';
         saveIcon.innerHTML = '⬇';
@@ -1391,6 +1686,7 @@
 
         icons.appendChild(favIcon);
         icons.appendChild(copyIcon);
+        icons.appendChild(shareIcon);
         icons.appendChild(saveIcon);
 
         card.appendChild(combo);
@@ -1560,6 +1856,20 @@
         const matchesFav = !favOnly || card.dataset.fav === '1';
         const match = matchesSearch && matchesFav;
         card.style.display = match ? '' : 'none';
+
+        // ===== 6번: 검색 하이라이트 =====
+        const descEl = card.querySelector('.desc');
+        if(descEl){
+          // 원본 복원
+          if(descEl.dataset.orig) descEl.innerHTML = descEl.dataset.orig;
+          // 하이라이트 적용
+          if(match && q){
+            const escaped = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+            const regex = new RegExp(`(${escaped})`,'gi');
+            descEl.innerHTML = descEl.innerHTML.replace(regex,'<mark class="search-highlight">$1</mark>');
+          }
+        }
+
         if(match){
           visibleInSection++;
           totalVisible++;
@@ -1611,11 +1921,45 @@
     setTimeout(()=>spotlightShuffle.classList.remove('spin'), 400);
   });
 
+  // ===================== 7번: 스크롤 진행 바 =====================
+  const scrollBar = document.getElementById('scrollBar');
+  function updateScrollBar(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollBar.style.width = progress + '%';
+    toTop.classList.toggle('show', scrollTop > 480);
+  }
+  window.addEventListener('scroll', updateScrollBar, { passive:true });
+
+  // ===================== 5번: URL 파라미터로 공유 링크 처리 =====================
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const catParam = params.get('cat');
+    const keyParam = params.get('key');
+    if(catParam && keyParam){
+      // 해당 섹션으로 스크롤
+      setTimeout(()=>{
+        const targetSection = document.getElementById(catParam);
+        if(targetSection){
+          const offset = document.querySelector('.controls').offsetHeight + 20;
+          window.scrollTo({ top: targetSection.getBoundingClientRect().top + window.scrollY - offset, behavior:'smooth' });
+          // 해당 카드 하이라이트
+          const allCards = targetSection.querySelectorAll('.shortcut-card');
+          allCards.forEach(card=>{
+            if(card.dataset.keys === keyParam){
+              card.style.outline = '2px solid var(--accent)';
+              card.style.outlineOffset = '3px';
+              setTimeout(()=>{ card.style.outline=''; card.style.outlineOffset=''; }, 2500);
+            }
+          });
+        }
+      }, 600);
+    }
+  })();
+
   // ===================== 맨 위로 버튼 =====================
   const toTop = document.getElementById('toTop');
-  window.addEventListener('scroll', ()=>{
-    toTop.classList.toggle('show', window.scrollY > 480);
-  });
   toTop.addEventListener('click', ()=>{
     window.scrollTo({ top:0, behavior:'smooth' });
   });
